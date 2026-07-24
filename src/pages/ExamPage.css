@@ -1,0 +1,237 @@
+.exam {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.exam h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+}
+
+.exam__lead {
+  margin: 0;
+  max-width: 40rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.exam__rules {
+  margin: 0;
+  padding-left: 1.2rem;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.exam__coverage {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.exam__coverage h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
+}
+
+.exam__coverage ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.exam__coverage li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.exam__coverage li.is-short {
+  color: var(--bad);
+}
+
+.exam__coverage-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn--accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn--lg {
+  padding: 0.85rem 1.5rem;
+  font-size: 1.02rem;
+  width: fit-content;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.exam__bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0.9rem;
+  background: color-mix(in srgb, var(--bg) 88%, white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+}
+
+.exam__bar > div:first-child {
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.9rem;
+}
+
+.exam__bar span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.exam__timer {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.exam__timer.is-low {
+  color: var(--bad);
+}
+
+.exam__grid {
+  display: grid;
+  grid-template-columns: minmax(9rem, 11rem) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.exam__palette {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.35rem;
+  position: sticky;
+  top: 4.5rem;
+}
+
+.exam__palette button {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.exam__palette button.is-answered {
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+}
+
+.exam__palette button.is-current {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.exam__body {
+  display: grid;
+  gap: 1rem;
+}
+
+.exam__nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.exam__score {
+  padding: 1.5rem 1.4rem;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.exam__score.is-pass {
+  background: var(--ok-soft);
+  border-color: color-mix(in srgb, var(--ok) 35%, var(--line));
+}
+
+.exam__score.is-fail {
+  background: var(--bad-soft);
+  border-color: color-mix(in srgb, var(--bad) 35%, var(--line));
+}
+
+.exam__score-kicker {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.exam__score h1 {
+  margin: 0.35rem 0;
+  font-size: 2.6rem;
+}
+
+.exam__score p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.exam__result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.exam__review {
+  display: grid;
+  gap: 1rem;
+}
+
+.exam__review h2 {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+@media (max-width: 860px) {
+  .exam__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exam__palette {
+    position: static;
+    grid-template-columns: repeat(10, 1fr);
+  }
+}

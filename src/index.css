@@ -1,0 +1,62 @@
+:root {
+  --font-sans: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  --font-display: 'Noto Serif TC', 'Songti TC', serif;
+
+  --bg: #eef3f0;
+  --surface: #f7faf8;
+  --ink: #15231c;
+  --ink-soft: #31453a;
+  --muted: #66786e;
+  --line: #d5e0da;
+
+  --accent: #0f6b5c;
+  --accent-ink: #0b4f44;
+  --accent-soft: #d7eee8;
+
+  --sea: #1f4e79;
+  --sea-soft: #d9e6f2;
+
+  --ok: #1f7a45;
+  --ok-soft: #dff3e7;
+  --bad: #b42318;
+  --bad-soft: #fde8e6;
+
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #d9ebe4 0%, transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, #d5e3f0 0%, transparent 50%),
+    linear-gradient(180deg, #f3f7f5 0%, var(--bg) 40%, #e7efea 100%);
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page-status {
+  padding: 2rem 0;
+  color: var(--muted);
+}
+
+.page-status--err {
+  color: var(--bad);
+}

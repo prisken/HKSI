@@ -1,0 +1,9 @@
+node_modules
+dist
+.tmp
+.DS_Store
+*.log
+*.tsbuildinfo
+.vercel
+public/data/questions_scanned_backup.json
+public/data/questions_pastpaper.json

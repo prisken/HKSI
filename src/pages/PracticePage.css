@@ -1,0 +1,142 @@
+.practice {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.practice__top {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.practice__top h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+}
+
+.practice__top p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.back {
+  width: fit-content;
+  color: var(--accent-ink);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.practice__layout {
+  display: grid;
+  grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.practice__aside {
+  display: grid;
+  gap: 0.35rem;
+  position: sticky;
+  top: 1rem;
+}
+
+.practice__aside button {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.practice__aside button small {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+.practice__aside button span:last-child {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.practice__aside button.is-active,
+.practice__aside button:hover {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+.practice__aside button.is-active {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
+}
+
+.practice__ch-label {
+  min-width: 0;
+}
+
+.practice__main {
+  display: grid;
+  gap: 1rem;
+}
+
+.practice__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.practice__nav button,
+.practice__actions .btn {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.practice__nav button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn--accent {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: white !important;
+}
+
+.practice__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 860px) {
+  .practice__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .practice__aside {
+    position: static;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+
+  .practice__aside button small {
+    display: none;
+  }
+}

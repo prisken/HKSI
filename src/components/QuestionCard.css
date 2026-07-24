@@ -1,0 +1,145 @@
+.qcard {
+  display: grid;
+  gap: 1.1rem;
+  padding: 1.35rem 1.4rem 1.45rem;
+  background: color-mix(in srgb, var(--surface) 92%, white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.qcard__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.qcard__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.7rem;
+  align-items: center;
+}
+
+.qcard__badge {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.qcard__chapter {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.qcard__hot {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.qcard__stem {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.qcard__stem p {
+  margin: 0 0 0.35rem;
+}
+
+.qcard__options {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.qcard__option {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  text-align: left;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.qcard__option:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  transform: translateY(-1px);
+}
+
+.qcard__option.is-selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.qcard__option.is-correct {
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+
+.qcard__option.is-wrong {
+  border-color: var(--bad);
+  background: var(--bad-soft);
+}
+
+.qcard__option:disabled {
+  cursor: default;
+}
+
+.qcard__key {
+  width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.qcard__val {
+  line-height: 1.55;
+  padding-top: 0.12rem;
+}
+
+.qcard__reveal {
+  border-top: 1px dashed var(--line);
+  padding-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.qcard__answer {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.qcard__yours {
+  margin-left: 0.5rem;
+  color: var(--bad);
+  font-weight: 500;
+}
+
+.qcard__expl h4 {
+  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.qcard__expl p {
+  margin: 0 0 0.35rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
