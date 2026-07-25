@@ -150,8 +150,27 @@
 }
 
 @media (max-width: 760px) {
+  .home {
+    gap: 1.5rem;
+  }
+
+  .home__hero {
+    padding: 1rem 0 0.25rem;
+  }
+
   .home__modes {
     grid-template-columns: 1fr;
+  }
+
+  .mode {
+    min-height: 0;
+    padding: 1.15rem 1.1rem 1.25rem;
+  }
+
+  .home__weight-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
   }
 }
 

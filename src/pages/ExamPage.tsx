@@ -77,9 +77,6 @@ export function ExamPage() {
 
     return (
       <div className="exam exam--intro">
-        <Link to="/" className="back">
-          ← 返回
-        </Link>
         <h1>模擬考試</h1>
         <p className="exam__lead">
           系統會按溫習手冊考試規格（{EXAM_CONFIG.totalQuestions} 題／
@@ -126,9 +123,6 @@ export function ExamPage() {
   if (phase === 'result' && result) {
     return (
       <div className="exam exam--result">
-        <Link to="/" className="back">
-          ← 返回主頁
-        </Link>
         <header className={`exam__score ${result.passed ? 'is-pass' : 'is-fail'}`}>
           <p className="exam__score-kicker">{result.passed ? '合格' : '未合格'}</p>
           <h1>

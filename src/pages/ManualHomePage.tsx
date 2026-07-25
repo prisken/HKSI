@@ -10,11 +10,8 @@ export function ManualHomePage() {
   if (!meta) return null
 
   return (
-    <div className="manual">
+    <div className="manual manual--home">
       <header className="manual__top">
-        <Link to="/" className="back">
-          ← 返回
-        </Link>
         <div className="manual__version-badge" title={`版本識別：${meta.versionId}`}>
           <span className="manual__ver-label">溫習手冊 {meta.versionFull}</span>
           <span className="manual__ver-date">內容更新至 {meta.updatedThroughLabel}</span>

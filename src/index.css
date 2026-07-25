@@ -21,6 +21,10 @@
   --bad: #b42318;
   --bad-soft: #fde8e6;
 
+  --app-nav-h: 3.25rem;
+  --app-nav-h-mobile: 3rem;
+  --app-nav-offset: calc(var(--app-nav-h) + env(safe-area-inset-top, 0px));
+
   color: var(--ink);
   background:
     radial-gradient(1200px 600px at 10% -10%, #d9ebe4 0%, transparent 55%),
@@ -31,6 +35,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --app-nav-offset: calc(var(--app-nav-h-mobile) + env(safe-area-inset-top, 0px));
+  }
 }
 
 * {

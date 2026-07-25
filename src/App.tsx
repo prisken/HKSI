@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { AppNav } from './components/AppNav'
 import { HomePage } from './pages/HomePage'
 import { PracticePage } from './pages/PracticePage'
 import { ExamPage } from './pages/ExamPage'
@@ -10,6 +11,7 @@ import './App.css'
 export default function App() {
   return (
     <BrowserRouter>
+      <AppNav />
       <div className="app-shell">
         <Routes>
           <Route path="/" element={<HomePage />} />

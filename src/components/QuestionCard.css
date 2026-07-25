@@ -7,6 +7,23 @@
   border-radius: 14px;
 }
 
+@media (max-width: 640px) {
+  .qcard {
+    padding: 1rem 0.95rem 1.1rem;
+    border-radius: 12px;
+    gap: 0.9rem;
+  }
+
+  .qcard__stem {
+    font-size: 0.98rem;
+  }
+
+  .qcard__option {
+    padding: 0.7rem 0.75rem;
+    min-height: 2.85rem;
+  }
+}
+
 .qcard__head {
   display: flex;
   justify-content: space-between;

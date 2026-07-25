@@ -38,7 +38,7 @@
   display: grid;
   gap: 0.35rem;
   position: sticky;
-  top: 1rem;
+  top: calc(var(--app-nav-offset) + 0.75rem);
 }
 
 .practice__aside button {
@@ -94,6 +94,15 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  position: sticky;
+  top: calc(var(--app-nav-offset) + 0.35rem);
+  z-index: 3;
+  padding: 0.45rem 0.55rem;
+  margin: 0 -0.15rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg) 88%, white);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
 }
 
 .practice__nav button,
@@ -105,6 +114,7 @@
   padding: 0.55rem 1rem;
   cursor: pointer;
   font-weight: 600;
+  min-height: 2.5rem;
 }
 
 .practice__nav button:disabled {
@@ -124,19 +134,68 @@
 }
 
 @media (max-width: 860px) {
+  .practice {
+    gap: 0.9rem;
+  }
+
+  .practice__top h1 {
+    font-size: 1.28rem;
+  }
+
   .practice__layout {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .practice__aside {
-    position: static;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
+    position: sticky;
+    top: var(--app-nav-offset);
+    z-index: 4;
+    display: flex;
+    gap: 0.4rem;
+    max-width: 100%;
     overflow-x: auto;
-    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.45rem 0.15rem 0.55rem;
+    margin: 0 -0.25rem;
+    background: color-mix(in srgb, var(--bg) 90%, white);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+
+  .practice__aside::-webkit-scrollbar {
+    display: none;
+  }
+
+  .practice__aside button {
+    flex: 0 0 auto;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    border-color: var(--line);
+    background: var(--surface);
+    white-space: nowrap;
+    font-size: 0.84rem;
   }
 
   .practice__aside button small {
     display: none;
+  }
+
+  .practice__nav {
+    top: calc(var(--app-nav-offset) + 3.15rem);
+  }
+
+  .practice__actions {
+    position: sticky;
+    bottom: calc(0.65rem + env(safe-area-inset-bottom, 0px));
+    z-index: 3;
+    justify-content: stretch;
+  }
+
+  .practice__actions .btn {
+    width: 100%;
+    min-height: 2.85rem;
   }
 }

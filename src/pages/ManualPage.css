@@ -3,12 +3,24 @@
   gap: 1.5rem;
 }
 
+.back {
+  width: fit-content;
+  color: var(--accent-ink);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .manual__top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.manual--home .manual__top {
+  justify-content: flex-end;
 }
 
 .manual__version-badge {
@@ -161,10 +173,10 @@
 
 .manual__aside {
   position: sticky;
-  top: 0.75rem;
+  top: calc(var(--app-nav-offset) + 0.6rem);
   display: grid;
   gap: 0.25rem;
-  max-height: calc(100vh - 2rem);
+  max-height: calc(100vh - var(--app-nav-offset) - 1.5rem);
   overflow: auto;
   padding-right: 0.25rem;
 }
@@ -235,7 +247,7 @@
 .manual__section {
   display: grid;
   gap: 0.85rem;
-  scroll-margin-top: 1rem;
+  scroll-margin-top: calc(var(--app-nav-offset) + 0.75rem);
 }
 
 .manual__section h2 {
@@ -367,25 +379,97 @@
 }
 
 @media (max-width: 860px) {
+  .manual {
+    gap: 1rem;
+  }
+
+  .manual__intro h1,
+  .manual__content h1,
+  .manual__chapter-head h1 {
+    font-size: 1.28rem;
+  }
+
   .manual__layout {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .manual__aside {
-    position: static;
+    position: sticky;
+    top: var(--app-nav-offset);
+    z-index: 4;
     max-height: none;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.4rem;
     overflow-x: auto;
-    padding-bottom: 0.35rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.45rem 0.15rem 0.55rem;
+    margin: 0 -0.25rem;
+    background: color-mix(in srgb, var(--bg) 90%, white);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+
+  .manual__aside::-webkit-scrollbar {
+    display: none;
+  }
+
+  .manual__aside-label {
+    display: none;
+  }
+
+  .manual__aside button,
+  .manual__aside-chapters a {
+    flex: 0 0 auto;
+    width: auto;
+    white-space: nowrap;
+    padding: 0.48rem 0.72rem;
+    border-radius: 999px;
+    border-color: var(--line);
+    background: var(--surface);
+    font-size: 0.82rem;
   }
 
   .manual__aside-chapters {
     display: contents;
   }
 
+  .manual__content {
+    gap: 1.25rem;
+    max-width: none;
+    padding-bottom: 1.5rem;
+  }
+
+  .manual__p,
+  .manual__li {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .manual__p--num {
+    grid-template-columns: 2.3rem minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .manual__figure {
+    padding: 0.65rem;
+    border-radius: 10px;
+  }
+
   .manual__chapter-list a {
     grid-template-columns: 1fr;
     gap: 0.25rem;
+    padding: 0.85rem 0.9rem;
+  }
+
+  .manual__pager {
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .manual__section {
+    scroll-margin-top: calc(var(--app-nav-offset) + 3.4rem);
   }
 }

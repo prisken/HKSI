@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { QuestionCard } from '../components/QuestionCard'
 import { useQuestionBank } from '../hooks/useQuestionBank'
 import { groupByChapter } from '../lib/exam'
@@ -46,9 +46,6 @@ export function PracticePage() {
   return (
     <div className="practice">
       <header className="practice__top">
-        <Link to="/" className="back">
-          ← 返回
-        </Link>
         <div>
           <h1>按章節練習</h1>
           <p>答案可按需要顯示；不會限時。</p>
