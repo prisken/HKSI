@@ -39,9 +39,33 @@ export function shuffle<T>(items: T[], rng = Math.random): T[] {
   return arr
 }
 
+/** Normalize text so near-identical stems from different PDFs collide. */
+function normalizeStem(stem: string): string {
+  return stem
+    .normalize('NFKC')
+    .replace(/[\s\u00a0]+/g, '')
+    .replace(/[“”「」『』"'′″]/g, '')
+    .replace(/[（(]/g, '(')
+    .replace(/[）)]/g, ')')
+    .replace(/[：:]/g, ':')
+    .replace(/[，,]/g, ',')
+    .replace(/[？?]/g, '?')
+    .toLowerCase()
+}
+
+/**
+ * Content fingerprint for exam uniqueness.
+ * Same stem (even with different option wording / source PDF) counts as one question.
+ */
+export function questionFingerprint(q: Question): string {
+  const stem = normalizeStem(q.stem || '')
+  return stem || `id:${q.id}`
+}
+
 /**
  * Build a mock exam by sampling questions using the chapter ratio from EXAM_CONFIG.
- * If a chapter lacks enough items, remaining slots are filled from other chapters.
+ * Never repeats the same question id or the same stem (within / across chapters).
+ * If a chapter lacks enough unique items, remaining slots are filled from other chapters.
  */
 export function buildExamPaper(bank: Question[], config: ExamConfig = EXAM_CONFIG): ExamQuestion[] {
   const byChapter = new Map<number, Question[]>()
@@ -53,30 +77,35 @@ export function buildExamPaper(bank: Question[], config: ExamConfig = EXAM_CONFI
   }
 
   const picked: Question[] = []
-  const used = new Set<string>()
-  const shortfall: number[] = []
+  const usedIds = new Set<string>()
+  const usedFingerprints = new Set<string>()
+
+  function tryTake(q: Question): boolean {
+    if (usedIds.has(q.id)) return false
+    const fp = questionFingerprint(q)
+    if (usedFingerprints.has(fp)) return false
+    picked.push(q)
+    usedIds.add(q.id)
+    usedFingerprints.add(fp)
+    return true
+  }
 
   for (const chapter of Object.keys(config.chapterCounts).map(Number)) {
     const target = config.chapterCounts[chapter]
     const pool = shuffle(byChapter.get(chapter) ?? [])
-    const take = Math.min(target, pool.length)
-    for (let i = 0; i < take; i++) {
-      picked.push(pool[i])
-      used.add(pool[i].id)
+    let taken = 0
+    for (const q of pool) {
+      if (taken >= target) break
+      if (tryTake(q)) taken++
     }
-    if (take < target) shortfall.push(target - take)
   }
 
-  let need = shortfall.reduce((a, b) => a + b, 0)
-  need += Math.max(0, config.totalQuestions - picked.length)
-
+  let need = Math.max(0, config.totalQuestions - picked.length)
   if (need > 0) {
-    const filler = shuffle(bank.filter((q) => q.answer && !used.has(q.id)))
+    const filler = shuffle(bank.filter((q) => Boolean(q.answer)))
     for (const q of filler) {
       if (need <= 0) break
-      picked.push(q)
-      used.add(q.id)
-      need--
+      if (tryTake(q)) need--
     }
   }
 
