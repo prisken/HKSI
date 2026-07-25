@@ -1,0 +1,481 @@
+{
+  "versionId": "v2.8-2016-08",
+  "edition": "第二版",
+  "versionLabel": "2.8",
+  "versionFull": "第 2.8 版",
+  "firstPublished": "2011-04",
+  "firstPublishedLabel": "二零一一年四月",
+  "updatedThrough": "2016-08",
+  "updatedThroughLabel": "二零一六年八月",
+  "publisher": "香港證券及投資學會",
+  "paper": "試卷一：基本證券及期貨規例",
+  "isbn": "978-988-97139-6-9",
+  "sourceFile": "896219724-HKSI-Study-Manual-L01-Chi.pdf",
+  "notes": [
+    "內容摘自 HKSI 溫習手冊電子版；圖表由原 PDF 向量頁面截取。",
+    "考試題目以學會當時有效之溫習手冊及更新文件為準。",
+    "本應用並非 HKSI 官方產品。"
+  ],
+  "extractedAt": "2026-07-24T16:46:37",
+  "chapterCount": 9,
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "香港金融業監管概覽",
+      "fullTitle": "第 1 章：香港金融業監管概覽",
+      "sectionCount": 9,
+      "figureCount": 4,
+      "nav": [
+        {
+          "id": "overview",
+          "title": "本章概覽"
+        },
+        {
+          "id": "objectives",
+          "title": "學習重點"
+        },
+        {
+          "id": "1",
+          "title": "金融產品與服務及其監管"
+        },
+        {
+          "id": "2",
+          "title": "監管當局"
+        },
+        {
+          "id": "3",
+          "title": "證券及期貨事務監察委員會（ “證監會 ”）"
+        },
+        {
+          "id": "4",
+          "title": "香港交易及結算所有限公司"
+        },
+        {
+          "id": "5",
+          "title": "香港金融市場的參與者及中介人"
+        },
+        {
+          "id": "summary",
+          "title": "本章摘要"
+        },
+        {
+          "id": "keypoints",
+          "title": "要點"
+        }
+      ],
+      "file": "chapters/01.json"
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "title": "相關香港法例及新《公司條例》的原則",
+      "fullTitle": "第 2 章：相關香港法例及新《公司條例》的原則",
+      "sectionCount": 6,
+      "figureCount": 1,
+      "nav": [
+        {
+          "id": "overview",
+          "title": "本章概覽"
+        },
+        {
+          "id": "objectives",
+          "title": "學習重點"
+        },
+        {
+          "id": "1",
+          "title": "香港法律制度概述"
+        },
+        {
+          "id": "2",
+          "title": "新《公司條例》及相關事宜"
+        },
+        {
+          "id": "summary",
+          "title": "本章摘要"
+        },
+        {
+          "id": "keypoints",
+          "title": "要點"
+        }
+      ],
+      "file": "chapters/02.json"
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "title": "《證券及期貨條例》",
+      "fullTitle": "第 3 章：《證券及期貨條例》",
+      "sectionCount": 16,
+      "figureCount": 0,
+      "nav": [
+        {
+          "id": "overview",
+          "title": "本章概覽"
+        },
+        {
+          "id": "objectives",
+          "title": "學習重點"
+        },
+        {
+          "id": "1",
+          "title": "背景"
+        },
+        {
+          "id": "2",
+          "title": "第 I 部－導言"
+        },
+        {
+          "id": "3",
+          "title": "第 II 部－證券及期貨事務監察委員會（ “證監會 ”）－其架構、目標、職能、權力及責任"
+        },
+        {
+          "id": "4",
+          "title": "第 III 部－交易所公司、結算所、交易所控制人、投資者賠償公司及自動化交易服務"
+        },
+        {
+          "id": "5",
+          "title": "第 IV 部－投資要約"
+        },
+        {
+          "id": "6",
+          "title": "第 V 部－發牌及註冊"
+        },
+        {
+          "id": "7",
+          "title": "第 VI 部－關乎中介人的資本規定、客戶資產、紀錄及審計"
+        },
+        {
+          "id": "8",
+          "title": "第 VII 部－中介人的業務操守"
+        },
+        {
+          "id": "9",
+          "title": "第 VIII 部－監管及調查"
+        },
+        {
+          "id": "10",
+          "title": "第 IX 部－紀律"
+        },
+        {
+          "id": "11",
+          "title": "第 X 部－干預的權力及法律程序"
+        },
+        {
+          "id": "12",
+          "title": "第 XI 部－證券及期貨事務上訴審裁處"
+        },
+        {
+          "id": "summary",
+          "title": "本章摘要"
+        },
+        {
+          "id": "keypoints",
+          "title": "要點"
+        }
+      ],
+      "file": "chapters/03.json"
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "title": "發牌及註冊與附屬法例",
+      "fullTitle": "第 4 章：發牌及註冊與附屬法例",
+      "sectionCount": 10,
+      "figureCount": 2,
+      "nav": [
+        {
+          "id": "overview",
+          "title": "本章概覽"
+        },
+        {
+          "id": "objectives",
+          "title": "學習重點"
+        },
+        {
+          "id": "1",
+          "title": "《證券及期貨條例》的發牌及註冊規定"
+        },
+        {
+          "id": "2",
+          "title": "資本規定"
+        },
+        {
+          "id": "3",
+          "title": "客戶證券規定"
+        },
+        {
+          "id": "4",
+          "title": "《證券及期貨（客戶款項）規則》"
+        },
+        {
+          "id": "5",
+          "title": "《證券及期貨（備存紀錄）規則》"
+        },
+        {
+          "id": "6",
+          "title": "《證券及期貨（成交單據、戶口結單及收據）規則》"
+        },
+        {
+          "id": "summary",
+          "title": "本章摘要"
+        },
+        {
+          "id": "keypoints",
+          "title": "要點"
+        }
+      ],
+      "file": "chapters/04.json"
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "title": "業務操守與客戶關係",
+      "fullTitle": "第 5 章：業務操守與客戶關係",
+      "sectionCount": 10,
+      "figureCount": 0,
+      "nav": [
+        {
+          "id": "overview",
+          "title": "本章概覽"
+        },
+        {
+          "id": "objectives",
+          "title": "學習重點"
+        },
+        {
+          "id": "1",
+          "title": "引言"
+        },
+        {
+          "id": "2",
+          "title": "《證券及期貨事務監察委員會持牌人或註冊人操守準則》"
+        },
+        {
+          "id": "3",
+          "title": "《基金經理操守準則》"
+        },
+        {
+          "id": "4",
+          "title": "《企業融資顧問操守準則》"
+        },
+        {
+          "id": "5",
+          "title": "《提供信貸評級服務人士的操守準則》"
+        },
+        {
+          "id": "6",
+          "title": "《股份登記機構操守準則》"
+        },
+        {
+          "id": "summary",
+          "title": "本章摘要"
+        },
+        {
+          "id": "keypoints",
+          "title": "要點"
+        }
+      ],
+      "file": "chapters/05.json"
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "title": "業務運作與常規",
+      "fullTitle": "第 6 章：業務運作與常規",
+      "sectionCount": 11,
+      "figureCount": 0,
+      "nav": [
+        {
+          "id": "overview",
+          "title": "本章概覽"
+        },
+        {
+          "id": "objectives",
+          "title": "學習重點"
+        },
+        {
+          "id": "1",
+          "title": "引言"
+        },
+        {
+          "id": "2",
+          "title": "《適用於證券及期貨事務監察委員會持牌人或註冊人的管理、監督及內部監控指引》"
+        },
+        {
+          "id": "3",
+          "title": "防止洗錢及恐怖分子資金籌集"
+        },
+        {
+          "id": "4",
+          "title": "電子交易及另類交易平台"
+        },
+        {
+          "id": "5",
+          "title": "《個人資料（私隱）條例》"
+        },
+        {
+          "id": "6",
+          "title": "合規及相關事宜"
+        },
+        {
+          "id": "7",
+          "title": "投保"
+        },
+        {
+          "id": "summary",
+          "title": "本章摘要"
+        },
+        {
+          "id": "keypoints",
+          "title": "要點"
+        }
+      ],
+      "file": "chapters/06.json"
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "title": "在香港交易所的參與",
+      "fullTitle": "第 7 章：在香港交易所的參與",
+      "sectionCount": 10,
+      "figureCount": 1,
+      "nav": [
+        {
+          "id": "overview",
+          "title": "本章概覽"
+        },
+        {
+          "id": "objectives",
+          "title": "學習重點"
+        },
+        {
+          "id": "1",
+          "title": "導言"
+        },
+        {
+          "id": "2",
+          "title": "香港交易及結算所有限公司"
+        },
+        {
+          "id": "3",
+          "title": "香港聯合交易所有限公司（ “聯交所 ”）上市證券的交易"
+        },
+        {
+          "id": "4",
+          "title": "在聯交所買賣的交易所買賣期權"
+        },
+        {
+          "id": "5",
+          "title": "期貨合約交易"
+        },
+        {
+          "id": "6",
+          "title": "買賣及市場推廣"
+        },
+        {
+          "id": "summary",
+          "title": "本章摘要"
+        },
+        {
+          "id": "keypoints",
+          "title": "要點"
+        }
+      ],
+      "file": "chapters/07.json"
+    },
+    {
+      "id": "8",
+      "number": 8,
+      "title": "企業融資及證監會的認可產品",
+      "fullTitle": "第 8 章：企業融資及證監會的認可產品",
+      "sectionCount": 7,
+      "figureCount": 0,
+      "nav": [
+        {
+          "id": "overview",
+          "title": "本章概覽"
+        },
+        {
+          "id": "objectives",
+          "title": "學習重點"
+        },
+        {
+          "id": "1",
+          "title": "有關上市的規則"
+        },
+        {
+          "id": "2",
+          "title": "收購及合併及股份回購"
+        },
+        {
+          "id": "3",
+          "title": "證監會的認可產品"
+        },
+        {
+          "id": "summary",
+          "title": "本章摘要"
+        },
+        {
+          "id": "keypoints",
+          "title": "要點"
+        }
+      ],
+      "file": "chapters/08.json"
+    },
+    {
+      "id": "9",
+      "number": 9,
+      "title": "市場失當行為及不當交易行為",
+      "fullTitle": "第 9 章：市場失當行為及不當交易行為",
+      "sectionCount": 9,
+      "figureCount": 0,
+      "nav": [
+        {
+          "id": "overview",
+          "title": "本章概覽"
+        },
+        {
+          "id": "objectives",
+          "title": "學習重點"
+        },
+        {
+          "id": "1",
+          "title": "在《證券及期貨條例》下的市場失當行為"
+        },
+        {
+          "id": "2",
+          "title": "市場失當行為的後果"
+        },
+        {
+          "id": "3",
+          "title": "未獲邀約的造訪"
+        },
+        {
+          "id": "4",
+          "title": "不當交易手法"
+        },
+        {
+          "id": "5",
+          "title": "執法行動"
+        },
+        {
+          "id": "summary",
+          "title": "本章摘要"
+        },
+        {
+          "id": "keypoints",
+          "title": "要點"
+        }
+      ],
+      "file": "chapters/09.json"
+    }
+  ],
+  "extras": [
+    {
+      "id": "updates-2.8",
+      "title": "2.8 版的主要更新（2016年8月）",
+      "file": "extras/updates-2.8.json"
+    }
+  ]
+}

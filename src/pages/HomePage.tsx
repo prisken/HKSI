@@ -16,7 +16,7 @@ export function HomePage() {
         <p className="home__brand">HKSI 試卷一</p>
         <h1>基本證券及期貨規例<br />練習與模擬考試</h1>
         <p className="home__lead">
-          以練習題庫按章節溫習，或以溫習手冊考試規格抽題進行 60 題限時模擬試。
+          閱讀溫習手冊、按章節練習題庫，或以考試規格進行 60 題限時模擬試。
         </p>
         <div className="home__stats" aria-live="polite">
           {loading ? <span>正在載入題庫…</span> : null}
@@ -32,6 +32,11 @@ export function HomePage() {
       </section>
 
       <section className="home__modes">
+        <Link to="/manual" className="mode mode--manual">
+          <span className="mode__kicker">溫習手冊</span>
+          <h2>分段閱讀</h2>
+          <p>按章節／小節跳讀。目前版本 2.8，內容更新至 2016 年 8 月。</p>
+        </Link>
         <Link to="/practice" className="mode mode--practice">
           <span className="mode__kicker">模式一</span>
           <h2>按章節練習</h2>

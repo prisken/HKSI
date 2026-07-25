@@ -1,0 +1,18 @@
+{
+  "currentVersion": "v2.8-2016-08",
+  "availableVersions": [
+    {
+      "versionId": "v2.8-2016-08",
+      "versionLabel": "2.8",
+      "updatedThrough": "2016-08",
+      "updatedThroughLabel": "2016年8月",
+      "edition": "第二版",
+      "path": "v2.8-2016-08/meta.json"
+    }
+  ],
+  "howToUpdate": [
+    "將新版 PDF 匯出到 public/data/manual/<newVersionId>/（含 figures/）",
+    "更新 index.json 的 currentVersion",
+    "舊版可保留以便對照"
+  ]
+}
