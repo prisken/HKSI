@@ -1,4 +1,7 @@
+import type { MouseEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { AnswerKey, Question } from '../types'
+import { buildManualHref, EXAM_RESULT_KEY, type ManualReturnState } from '../lib/navigation'
 import './QuestionCard.css'
 
 interface Props {
@@ -8,6 +11,8 @@ interface Props {
   onSelect?: (key: AnswerKey) => void
   showAnswer?: boolean
   disabled?: boolean
+  /** Where to return after opening the study-manual link. */
+  manualReturn?: ManualReturnState
 }
 
 const KEYS: AnswerKey[] = ['A', 'B', 'C', 'D']
@@ -19,11 +24,33 @@ export function QuestionCard({
   onSelect,
   showAnswer = false,
   disabled = false,
+  manualReturn,
 }: Props) {
+  const navigate = useNavigate()
   const correct = question.answer
+  const ref = question.manualRef
+
+  function openManual(e: MouseEvent<HTMLAnchorElement>) {
+    if (!ref || !manualReturn) return
+    e.preventDefault()
+    if (manualReturn.focusId && manualReturn.path.startsWith('/exam')) {
+      try {
+        const raw = sessionStorage.getItem(EXAM_RESULT_KEY)
+        if (raw) {
+          const data = JSON.parse(raw) as { focusId?: string }
+          data.focusId = manualReturn.focusId
+          sessionStorage.setItem(EXAM_RESULT_KEY, JSON.stringify(data))
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+    const href = buildManualHref(ref.path, manualReturn)
+    navigate(href)
+  }
 
   return (
-    <article className="qcard">
+    <article className="qcard" id={`q-${question.id}`}>
       <header className="qcard__head">
         <div className="qcard__meta">
           <span className="qcard__badge">
@@ -87,6 +114,21 @@ export function QuestionCard({
               {question.explanation.split('\n').map((line, i) => (
                 <p key={i}>{line}</p>
               ))}
+            </div>
+          ) : null}
+          {ref ? (
+            <div className="qcard__manual">
+              <h4>溫習手冊對照</h4>
+              <a
+                className="qcard__manual-link"
+                href={ref.path}
+                onClick={openManual}
+              >
+                查看：{ref.label}
+              </a>
+              <p className="qcard__manual-hint">
+                開啟後可按「返回」回到目前題目／考試結果。
+              </p>
             </div>
           ) : null}
         </div>

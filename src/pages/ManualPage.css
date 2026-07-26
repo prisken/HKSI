@@ -11,6 +11,48 @@
   font-weight: 600;
 }
 
+.manual__return {
+  position: sticky;
+  top: var(--app-nav-offset);
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+  background: color-mix(in srgb, var(--accent-soft) 70%, white);
+  backdrop-filter: blur(10px);
+}
+
+.manual__return-btn {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 2.4rem;
+}
+
+.manual__return-note {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.manual__p--num.is-manual-focus,
+.manual__section.is-manual-focus {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.manual__p--num {
+  scroll-margin-top: calc(var(--app-nav-offset) + 4.5rem);
+}
+
 .manual__top {
   display: flex;
   justify-content: space-between;

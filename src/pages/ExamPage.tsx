@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { QuestionCard } from '../components/QuestionCard'
 import { useQuestionBank } from '../hooks/useQuestionBank'
 import {
@@ -9,24 +9,77 @@ import {
   formatTime,
   scoreExam,
 } from '../lib/exam'
+import { EXAM_RESULT_KEY } from '../lib/navigation'
 import type { AnswerKey, ExamQuestion } from '../types'
 import './ExamPage.css'
 
 type Phase = 'intro' | 'running' | 'result'
 
+interface SavedExamResult {
+  paper: ExamQuestion[]
+  answers: Record<string, AnswerKey | null>
+  elapsed: number
+  focusId?: string
+}
+
+function loadSavedResult(): SavedExamResult | null {
+  try {
+    const raw = sessionStorage.getItem(EXAM_RESULT_KEY)
+    if (!raw) return null
+    return JSON.parse(raw) as SavedExamResult
+  } catch {
+    return null
+  }
+}
+
+function saveResult(data: SavedExamResult) {
+  try {
+    sessionStorage.setItem(EXAM_RESULT_KEY, JSON.stringify(data))
+  } catch {
+    /* ignore */
+  }
+}
+
 export function ExamPage() {
   const { data, loading, error } = useQuestionBank()
+  const [params] = useSearchParams()
   const [phase, setPhase] = useState<Phase>('intro')
   const [paper, setPaper] = useState<ExamQuestion[]>([])
   const [answers, setAnswers] = useState<Record<string, AnswerKey | null>>({})
   const [cursor, setCursor] = useState(0)
   const [remaining, setRemaining] = useState(EXAM_CONFIG.durationMinutes * 60)
   const [elapsed, setElapsed] = useState(0)
+  const [hydrated, setHydrated] = useState(false)
 
   const answeredCount = useMemo(
     () => Object.values(answers).filter(Boolean).length,
     [answers],
   )
+
+  // Restore exam result when returning from study manual
+  useEffect(() => {
+    if (hydrated) return
+    const saved = loadSavedResult()
+    const wantResume = params.get('resume') === '1' || Boolean(saved && params.get('from') !== '0')
+    if (saved?.paper?.length && (wantResume || params.get('resume') === '1')) {
+      // Only auto-resume when explicitly asked via resume=1 (set by return link)
+      if (params.get('resume') === '1') {
+        setPaper(saved.paper)
+        setAnswers(saved.answers || {})
+        setElapsed(saved.elapsed || 0)
+        setPhase('result')
+        if (saved.focusId) {
+          window.setTimeout(() => {
+            document.getElementById(`q-${saved.focusId}`)?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            })
+          }, 120)
+        }
+      }
+    }
+    setHydrated(true)
+  }, [hydrated, params])
 
   useEffect(() => {
     if (phase !== 'running') return
@@ -44,8 +97,19 @@ export function ExamPage() {
     return () => window.clearInterval(id)
   }, [phase])
 
+  // Persist result page so manual deep-links can return here
+  useEffect(() => {
+    if (phase !== 'result' || paper.length === 0) return
+    saveResult({ paper, answers, elapsed })
+  }, [phase, paper, answers, elapsed])
+
   function startExam() {
     if (!data) return
+    try {
+      sessionStorage.removeItem(EXAM_RESULT_KEY)
+    } catch {
+      /* ignore */
+    }
     const next = buildExamPaper(data.questions, EXAM_CONFIG)
     setPaper(next)
     setAnswers(Object.fromEntries(next.map((q) => [q.id, null])))
@@ -64,7 +128,7 @@ export function ExamPage() {
     setPhase('result')
   }
 
-  if (loading) return <p className="page-status">載入題庫中…</p>
+  if (loading || !hydrated) return <p className="page-status">載入題庫中…</p>
   if (error) return <p className="page-status page-status--err">{error}</p>
   if (!data) return null
 
@@ -74,6 +138,7 @@ export function ExamPage() {
       const have = data.questions.filter((q) => q.chapter === ch).length
       return { ch, need, have }
     })
+    const saved = loadSavedResult()
 
     return (
       <div className="exam exam--intro">
@@ -87,7 +152,10 @@ export function ExamPage() {
         <ul className="exam__rules">
           <li>共 {EXAM_CONFIG.totalQuestions} 條多項選擇題</li>
           <li>限時 {EXAM_CONFIG.durationMinutes} 分鐘；時間到自動交卷</li>
-          <li>合格分數 {EXAM_CONFIG.passPercent}%（即至少 {Math.ceil(EXAM_CONFIG.totalQuestions * EXAM_CONFIG.passPercent / 100)} 題正解）</li>
+          <li>
+            合格分數 {EXAM_CONFIG.passPercent}%（即至少{' '}
+            {Math.ceil((EXAM_CONFIG.totalQuestions * EXAM_CONFIG.passPercent) / 100)} 題正解）
+          </li>
           <li>答錯不扣分</li>
         </ul>
 
@@ -110,9 +178,25 @@ export function ExamPage() {
           </p>
         </div>
 
-        <button type="button" className="btn btn--accent btn--lg" onClick={startExam}>
-          開始模擬考試
-        </button>
+        <div className="exam__result-actions">
+          <button type="button" className="btn btn--accent btn--lg" onClick={startExam}>
+            開始模擬考試
+          </button>
+          {saved?.paper?.length ? (
+            <button
+              type="button"
+              className="btn btn--lg"
+              onClick={() => {
+                setPaper(saved.paper)
+                setAnswers(saved.answers || {})
+                setElapsed(saved.elapsed || 0)
+                setPhase('result')
+              }}
+            >
+              繼續上次成績檢討
+            </button>
+          ) : null}
+        </div>
       </div>
     )
   }
@@ -144,6 +228,9 @@ export function ExamPage() {
 
         <section className="exam__review">
           <h2>逐題檢討</h2>
+          <p className="exam__coverage-note">
+            每題可開啟溫習手冊對照章節；返回後會回到本成績頁。
+          </p>
           {paper.map((q, i) => (
             <QuestionCard
               key={q.id}
@@ -152,6 +239,11 @@ export function ExamPage() {
               selected={answers[q.id]}
               showAnswer
               disabled
+              manualReturn={{
+                path: `/exam?resume=1`,
+                label: '返回考試結果',
+                focusId: q.id,
+              }}
             />
           ))}
         </section>
@@ -209,7 +301,12 @@ export function ExamPage() {
           ) : null}
 
           <div className="exam__nav">
-            <button type="button" className="btn" disabled={cursor === 0} onClick={() => setCursor((c) => c - 1)}>
+            <button
+              type="button"
+              className="btn"
+              disabled={cursor === 0}
+              onClick={() => setCursor((c) => c - 1)}
+            >
               上一題
             </button>
             <button

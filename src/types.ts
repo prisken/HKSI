@@ -1,5 +1,15 @@
 export type AnswerKey = 'A' | 'B' | 'C' | 'D'
 
+export interface ManualRef {
+  chapter: number
+  section: string
+  sectionTitle: string
+  label: string
+  path: string
+  confidence?: 'high' | 'medium' | 'low'
+  paragraph?: string
+}
+
 export interface Question {
   id: string
   number: number
@@ -15,6 +25,8 @@ export interface Question {
   chapterTitle: string
   sourcePage?: number
   image?: string | null
+  /** Link to study-manual section that supports this answer. */
+  manualRef?: ManualRef
 }
 
 export interface QuestionBank {

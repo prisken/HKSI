@@ -1,6 +1,11 @@
-import { Fragment, useEffect, useMemo } from 'react'
-import { Link, useParams, useSearchParams } from 'react-router-dom'
+import { Fragment, useEffect, useMemo, useState } from 'react'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useManualChapter } from '../hooks/useManual'
+import {
+  clearManualReturn,
+  readManualReturn,
+  type ManualReturnState,
+} from '../lib/navigation'
 import type { ManualBlock } from '../types/manual'
 import './ManualPage.css'
 
@@ -35,10 +40,9 @@ function BlockView({
     )
   }
 
-  // paragraph (default)
   if (block.num) {
     return (
-      <p className="manual__p manual__p--num">
+      <p className="manual__p manual__p--num" id={`para-${block.num}`}>
         <span className="manual__num">{block.num}</span>
         <span className="manual__p-body">{block.text}</span>
       </p>
@@ -50,9 +54,16 @@ function BlockView({
 
 export function ManualChapterPage() {
   const { chapterId } = useParams()
+  const navigate = useNavigate()
   const [params, setParams] = useSearchParams()
   const sectionParam = params.get('section')
+  const paraParam = params.get('para')
   const { chapter, meta, loading, error } = useManualChapter(chapterId)
+  const [returnTo, setReturnTo] = useState<ManualReturnState | null>(null)
+
+  useEffect(() => {
+    setReturnTo(readManualReturn())
+  }, [])
 
   const activeSection = useMemo(() => {
     if (!chapter) return null
@@ -64,14 +75,30 @@ export function ManualChapterPage() {
 
   useEffect(() => {
     if (!chapter || !activeSection) return
-    const el = document.getElementById(`sec-${activeSection.id}`)
-    if (el && sectionParam) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const targetId = paraParam ? `para-${paraParam}` : sectionParam ? `sec-${activeSection.id}` : null
+    if (!targetId) return
+    const el = document.getElementById(targetId) ?? document.getElementById(`sec-${activeSection.id}`)
+    if (el) {
+      window.setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        el.classList.add('is-manual-focus')
+        window.setTimeout(() => el.classList.remove('is-manual-focus'), 1800)
+      }, 80)
     }
-  }, [chapter, activeSection, sectionParam])
+  }, [chapter, activeSection, sectionParam, paraParam])
 
   function goSection(id: string) {
-    setParams({ section: id })
+    const next = new URLSearchParams(params)
+    next.set('section', id)
+    next.delete('para')
+    setParams(next)
+  }
+
+  function goBackToSource() {
+    const target = returnTo
+    clearManualReturn()
+    setReturnTo(null)
+    if (target?.path) navigate(target.path)
   }
 
   if (loading) return <p className="page-status">載入章節…</p>
@@ -84,6 +111,15 @@ export function ManualChapterPage() {
 
   return (
     <div className="manual manual--chapter">
+      {returnTo ? (
+        <div className="manual__return">
+          <button type="button" className="manual__return-btn" onClick={goBackToSource}>
+            ← {returnTo.label}
+          </button>
+          <span className="manual__return-note">閱讀後可返回剛才的題目／成績頁</span>
+        </div>
+      ) : null}
+
       <header className="manual__top">
         <Link to="/manual" className="back">
           ← 溫習手冊目錄

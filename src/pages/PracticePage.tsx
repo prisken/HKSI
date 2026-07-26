@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { QuestionCard } from '../components/QuestionCard'
 import { useQuestionBank } from '../hooks/useQuestionBank'
@@ -11,10 +11,14 @@ export function PracticePage() {
   const [params, setParams] = useSearchParams()
   const chapterParam = params.get('chapter')
   const activeChapter = chapterParam ? Number(chapterParam) : null
+  const qidParam = params.get('qid')
+  const revealParam = params.get('reveal') === '1'
+  const selParam = params.get('sel') as AnswerKey | null
 
   const [cursor, setCursor] = useState(0)
   const [selected, setSelected] = useState<AnswerKey | null>(null)
   const [revealed, setRevealed] = useState(false)
+  const [restored, setRestored] = useState(false)
 
   const groups = useMemo(() => (data ? groupByChapter(data.questions) : []), [data])
   const questions = useMemo(() => {
@@ -25,10 +29,47 @@ export function PracticePage() {
 
   const current = questions[cursor] ?? null
 
+  // Restore position from URL (e.g. after returning from study manual)
+  useEffect(() => {
+    if (!data || restored) return
+    if (qidParam) {
+      const idx = questions.findIndex((q) => q.id === qidParam)
+      if (idx >= 0) setCursor(idx)
+    }
+    if (selParam && ['A', 'B', 'C', 'D'].includes(selParam)) setSelected(selParam)
+    if (revealParam) setRevealed(true)
+    setRestored(true)
+    if (qidParam) {
+      window.setTimeout(() => {
+        document.getElementById(`q-${qidParam}`)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      }, 120)
+    }
+  }, [data, questions, qidParam, selParam, revealParam, restored])
+
+  // Keep URL in sync so manual return can restore exact spot
+  useEffect(() => {
+    if (!current || !restored) return
+    const next = new URLSearchParams()
+    if (activeChapter != null) next.set('chapter', String(activeChapter))
+    next.set('qid', current.id)
+    if (revealed) next.set('reveal', '1')
+    if (selected) next.set('sel', selected)
+    const same =
+      next.get('chapter') === params.get('chapter') &&
+      next.get('qid') === params.get('qid') &&
+      next.get('reveal') === params.get('reveal') &&
+      next.get('sel') === params.get('sel')
+    if (!same) setParams(next, { replace: true })
+  }, [current, activeChapter, revealed, selected, restored, params, setParams])
+
   function selectChapter(ch: number | null) {
     setCursor(0)
     setSelected(null)
     setRevealed(false)
+    setRestored(true)
     if (ch == null) setParams({})
     else setParams({ chapter: String(ch) })
   }
@@ -43,12 +84,22 @@ export function PracticePage() {
   if (error) return <p className="page-status page-status--err">{error}</p>
   if (!data) return null
 
+  const returnPath = (() => {
+    const p = new URLSearchParams()
+    if (activeChapter != null) p.set('chapter', String(activeChapter))
+    if (current) p.set('qid', current.id)
+    p.set('reveal', '1')
+    if (selected) p.set('sel', selected)
+    const qs = p.toString()
+    return `/practice${qs ? `?${qs}` : ''}`
+  })()
+
   return (
     <div className="practice">
       <header className="practice__top">
         <div>
           <h1>按章節練習</h1>
-          <p>答案可按需要顯示；不會限時。</p>
+          <p>答案可按需要顯示；不會限時。顯示答案後可跳至溫習手冊對照章節。</p>
         </div>
       </header>
 
@@ -107,6 +158,11 @@ export function PracticePage() {
                   setSelected(k)
                 }}
                 showAnswer={revealed}
+                manualReturn={{
+                  path: returnPath,
+                  label: '返回練習題',
+                  focusId: current.id,
+                }}
               />
 
               <div className="practice__actions">

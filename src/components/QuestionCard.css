@@ -148,7 +148,8 @@
   font-weight: 500;
 }
 
-.qcard__expl h4 {
+.qcard__expl h4,
+.qcard__manual h4 {
   margin: 0 0 0.35rem;
   font-size: 0.85rem;
   color: var(--muted);
@@ -159,4 +160,31 @@
   margin: 0 0 0.35rem;
   line-height: 1.65;
   color: var(--ink-soft);
+}
+
+.qcard__manual {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+}
+
+.qcard__manual-link {
+  color: var(--accent-ink);
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.45;
+}
+
+.qcard__manual-link:hover {
+  text-decoration: underline;
+}
+
+.qcard__manual-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.45;
 }

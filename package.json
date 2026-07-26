@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "extract": "python3 scripts/parse_pastpaper.py",
     "extract:mock1": "python3 scripts/parse_mock_test_1.py",
-    "extract:manual": "python3 scripts/extract_manual.py"
+    "extract:manual": "python3 scripts/extract_manual.py",
+    "link:manual": "python3 scripts/link_questions_to_manual.py"
   },
   "dependencies": {
     "react": "^19.1.0",
